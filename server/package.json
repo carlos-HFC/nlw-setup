@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/http/server.ts"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,8 +20,10 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.8.0",
     "@types/node": "^20.11.21",
     "prisma": "^5.10.2",
+    "prisma-erd-generator": "^1.11.2",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   }
