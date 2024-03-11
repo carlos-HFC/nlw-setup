@@ -1,5 +1,6 @@
-import { generateDatesFromYearBeginning } from "@/utils";
 import { Day } from "./day";
+
+import { generateDatesFromYearBeginning } from "@/utils";
 
 const weekdays = 'DSTQQSS';
 
@@ -20,8 +21,12 @@ export function Summary() {
       </div>
 
       <div className="grid grid-rows-7 grid-flow-col gap-3">
-        {summaryDates.map((_, i) => (
-          <Day key={i} />
+        {summaryDates.map((date, i) => (
+          <Day
+            key={date.toString()}
+            amount={5}
+            completed={Math.round(Math.random() * 5)}
+          />
         ))}
 
         {amountOfDaysToFill > 0 && Array.from({ length: amountOfDaysToFill }).map((_, i) => (
