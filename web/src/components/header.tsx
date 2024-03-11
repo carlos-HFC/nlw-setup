@@ -1,5 +1,10 @@
-import { PlusIcon } from "lucide-react";
+"use client";
+
+import * as Dialog from '@radix-ui/react-dialog';
+import { PlusIcon, XIcon } from "lucide-react";
 import Image from "next/image";
+
+import { NewHabitForm } from "./new-habit-form";
 
 export function Header() {
   return (
@@ -11,13 +16,34 @@ export function Header() {
         height="72"
       />
 
-      <button
-        type="button"
-        className="border border-violet-500 hover:border-violet-300 font-semibold rounded-lg px-6 py-4 flex items-center gap-3"
-      >
-        <PlusIcon className="stroke-violet-500 size-5" />
-        Novo hábito
-      </button>
+      <Dialog.Root>
+        <Dialog.Trigger
+          type="button"
+          className="border border-violet-500 hover:border-violet-300 font-semibold rounded-lg px-6 py-4 flex items-center gap-3"
+        >
+          <PlusIcon className="stroke-violet-500 size-5" />
+          Novo hábito
+        </Dialog.Trigger>
+
+        <Dialog.Portal>
+          <Dialog.Overlay className="w-screen h-dvh bg-black/80 fixed inset-0" />
+
+          <Dialog.Content className="absolute p-10 bg-zinc-900 rounded-2xl w-full max-w-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Dialog.Close className="absolute right-6 top-6 text-zinc-400 hover:text-zinc-200">
+              <XIcon
+                className="size-6"
+                aria-label="Fechar"
+              />
+            </Dialog.Close>
+
+            <Dialog.Title className="text-3xl leading-tight font-extrabold">
+              Criar hábito
+            </Dialog.Title>
+
+            <NewHabitForm />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   );
 }
