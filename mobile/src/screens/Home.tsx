@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { ScrollView, Text, View } from "react-native";
 
 import { Header } from "@/components/header";
@@ -11,6 +12,8 @@ const minimumSummaryDatesSize = 18 * 5;
 const amountOfDaysToFill = minimumSummaryDatesSize - summaryDates.length;
 
 export function Home() {
+  const navigation = useNavigation();
+
   return (
     <View className="flex-1 bg-background px-8 pt-16">
       <Header />
@@ -25,7 +28,7 @@ export function Home() {
               height: DAY_SIZE,
             }}
           >
-            {item}
+            {item.slice(0, 1)}
           </Text>
         ))}
       </View>
@@ -38,6 +41,7 @@ export function Home() {
           {summaryDates.map(item => (
             <HabitDay
               key={item.toString()}
+              onPress={() => navigation.navigate("habit", { date: item.toISOString() })}
             />
           ))}
           {amountOfDaysToFill > 0 && Array.from({ length: amountOfDaysToFill }).map((_, i) => (
