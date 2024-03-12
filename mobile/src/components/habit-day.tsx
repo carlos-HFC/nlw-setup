@@ -1,8 +1,10 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 import { DAY_SIZE } from "@/constants";
 
-export function HabitDay() {
+interface HabitDayProps extends TouchableOpacityProps {}
+
+export function HabitDay(props: HabitDayProps) {
   return (
     <TouchableOpacity
       activeOpacity={.7}
@@ -11,6 +13,7 @@ export function HabitDay() {
         width: DAY_SIZE,
         height: DAY_SIZE
       }}
+      {...props}
     />
   );
 }
