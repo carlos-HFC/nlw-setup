@@ -4,7 +4,7 @@ import * as Popover from "@radix-ui/react-popover";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-import { Checkbox } from "./checkbox";
+import { HabitList } from "./habit-list";
 import { ProgressBar } from "./progress-bar";
 
 import { cn } from "@/utils";
@@ -42,12 +42,7 @@ export function Day({ amount = 0, completed = 0, date }: Readonly<DayProps>) {
 
           <ProgressBar progress={completePercentage} />
 
-          <div className="mt-6 flex flex-col gap-3">
-            <Checkbox
-              dayhabit
-              label="Beber água"
-            />
-          </div>
+          <HabitList date={date} />
 
           <Popover.Arrow className="fill-zinc-900 h-2 w-4" />
         </Popover.Content>

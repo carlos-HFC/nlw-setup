@@ -15,7 +15,15 @@ async function post(url: string, init?: RequestInit) {
   });
 }
 
+async function patch(url: string, init?: RequestInit) {
+  return await fetch(`${env.NEXT_API_URL}${url}`, {
+    method: 'PATCH',
+    ...init
+  });
+}
+
 export const api = {
   get,
-  post
+  post,
+  patch
 };

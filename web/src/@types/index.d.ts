@@ -4,3 +4,13 @@ type Summary = {
   completed: number;
   amount: number;
 };
+
+type Habits = {
+  id: string;
+  title: string;
+};
+
+type ListHabits = {
+  possibleHabits: Habits[];
+  completedHabits: string[];
+};
