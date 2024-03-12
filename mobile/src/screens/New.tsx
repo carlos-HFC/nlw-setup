@@ -1,14 +1,16 @@
 import { Feather } from '@expo/vector-icons';
 import { useState } from "react";
-import { Text, TextInput, ScrollView, View, TouchableOpacity } from "react-native";
+import { Text, TextInput, ScrollView, View, TouchableOpacity, Alert } from "react-native";
 import colors from "tailwindcss/colors";
 
 import { BackButton } from "@/components/back-button";
 import { Checkbox } from "@/components/checkbox";
 
 import { WEEKDAYS } from "@/constants";
+import { api } from "@/services/api";
 
 export function New() {
+  const [title, setTitle] = useState("");
   const [weekdays, setWeekdays] = useState<number[]>([]);
 
   function handleToggleWeekday(index: number) {
@@ -19,6 +21,26 @@ export function New() {
 
       return [...prev, index];
     });
+  }
+
+  async function handleSubmit() {
+    try {
+      if (!title.trim() || weekdays.length === 0) {
+        return Alert.alert("Novo hábito", "Informe os dados para criar um hábito");
+      }
+
+      await api.post("/habits", {
+        title,
+        weekdays
+      });
+
+      setTitle("");
+      setWeekdays([]);
+
+      Alert.alert("Novo hábito", "Hábito criado com sucesso");
+    } catch (error) {
+      Alert.alert("Oops", "Erro ao criar um hábito");
+    }
   }
 
   return (
@@ -41,6 +63,8 @@ export function New() {
           className="h-12 px-4 rounded-lg mt-3 bg-zinc-900 text-white border-2 border-zinc-800 focus:border-green-600"
           placeholder="ex.: Exercícios, beber água, etc..."
           placeholderTextColor={colors.zinc[400]}
+          value={title}
+          onChangeText={setTitle}
         />
 
         <Text className="font-semibold mt-4 mb-3 text-white text-base">
@@ -59,6 +83,7 @@ export function New() {
         <TouchableOpacity
           activeOpacity={.7}
           className="w-full h-14 flex-row items-center justify-center gap-x-2 bg-green-600 rounded-md mt-6"
+          onPress={handleSubmit}
         >
           <Feather
             name="check"
