@@ -60,7 +60,7 @@ export async function routes(app: FastifyInstance) {
       }
     });
 
-    const completedHabits = day?.dayHabits?.map(item => item.habitId) ?? undefined;
+    const completedHabits = day?.dayHabits?.map(item => item.habitId) ?? [];
 
     return {
       possibleHabits,
