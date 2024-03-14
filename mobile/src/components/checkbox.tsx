@@ -1,7 +1,8 @@
-import { cn } from "@/utils/cn";
 import { Feather } from '@expo/vector-icons';
 import { Text, TouchableOpacity, TouchableOpacityProps, View } from "react-native";
 import colors from "tailwindcss/colors";
+
+import { cn } from "@/utils/cn";
 
 interface CheckboxProps extends TouchableOpacityProps {
   checked?: boolean;
@@ -26,7 +27,7 @@ export function Checkbox({ checked, title, ...props }: Readonly<CheckboxProps>) 
         />
       </View>
 
-      <Text className="text-white font-semibold text-base">
+      <Text className={cn("text-white font-semibold text-base", checked && "line-through text-zinc-400")}>
         {title}
       </Text>
     </TouchableOpacity>
